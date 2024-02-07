@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, NgZone, WritableSignal, computed, effect, signal } from '@angular/core';
 import { DataService } from './data.service';
+import { __values } from 'tslib';
 
 /**
  * tab : fonction utilitaire pour créer un tableau de T de taille length 
@@ -39,6 +40,21 @@ export class AppComponent {
       return Math.floor(Math.random() * 100).toString();
     }
     // à compléter
+    const sig_prim=signal(1);
+    const sig_deriv=computed<string[]>(()=>{
+      let tab1:string[]=[];
+      for(let i=0;i<sig_prim();i++){
+        tab1.push(rand100());
+      }
+      return tab1;
+    })
+    for (let i = 2; i <= 4; i++) {
+        this.ds.process( () => sig_prim.set(i) );
+      }
+    effect(()=>console.log("Questions 1:\n sig prim="+sig_prim()+"\nsig deriv="+sig_deriv().reduce((acc,v,i)=>
+                                                                                                              { return v;})));
+
+
   }
 
   
@@ -75,6 +91,19 @@ export class AppComponent {
     ];
 
     // à compléter
+    const students=signal<readonly Student[]>(L);
+    const studentsWithAverage=computed<readonly StudentWithAverage[]>(()=>{
+      let tab:StudentWithAverage[]=[];
+      
+      for(let i=0;i<students().length;i++){
+        const moy=students()[i].marks.reduce((acc,e)=>{return acc+e},0);
+        tab.push({...students()[i],average:moy,pass:moy>=10});
+        /*ma fina na3mol fct s.name=s_ancien.name la2en u cant assign anything s, only as a return value in the creation thus this method here */
+      }
+
+      return tab;
+    })
+  effect(()=>console.log("Questions 1:\n sig prim="+students()+"\nsig deriv="+studentsWithAverage()));
   }
 
 
@@ -106,6 +135,16 @@ export class AppComponent {
       { name: "Lyon", temperature: signal({value: 18, unit: '°C'}) },
       { name: "Marseille", temperature: signal({value: 300, unit: '°K'}) },
     ];
+    const sig1=computed<{readonly name: string; readonly temperature: number}[]>(()=>{
+          let tupe:{readonly name: string; readonly temperature: number}[]=[];
+          for(let i=0;i<L.length;i++){
+            let s:{readonly name: string; readonly temperature: number}={name:L[i].name,temperature:L[i].temperature().value};
+            tupe.push(s);
+          }
+          tupe.sort();
+          return tupe;
+        }
+    )
 
   }
 
