@@ -2,6 +2,7 @@
 https://github.com/l3-miage-cl-ihm/e-s-de-composants-angular-tu-2023-2024-l3miage-osmanm
 https://github.com/l3-miage-cl-ihm/gestion-de-matrices-l3-miage-2023-2024-l3miage-osmanm
 https://github.com/l3-miage-cl-ihm/todolist-en-angular-rxjs-l3miage-osmanm
+https://github.com/l3-miage-cl-ihm/reversi-en-angular-l3miage-osmanm
 
 
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=13712203&assignment_repo_type=AssignmentRepo)
